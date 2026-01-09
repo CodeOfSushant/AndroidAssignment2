@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<shape xmlns:android="http://schemas.android.com"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:shape="oval"
+    tools:ignore="NamespaceTypo">
+    <solid android:color="#F5F5F5" />
+    <stroke
+        android:width="1dp"
+        android:color="#E0E0E0" />
+
+    <size
+        android:width="120dp"
+        android:height="120dp" />
+</shape>
