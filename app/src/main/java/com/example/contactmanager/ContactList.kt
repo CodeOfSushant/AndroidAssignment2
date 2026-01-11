@@ -23,7 +23,6 @@ class ContactList : AppCompatActivity() {
     private lateinit var createConButton: Button
     private lateinit var backCMTV: TextView
 
-
     private var resultHelper = Permission(this)
 
 
@@ -44,15 +43,15 @@ class ContactList : AppCompatActivity() {
 
     override fun onResume() {
         super.onResume()
-        when {
-            ContextCompat.checkSelfPermission(this, Manifest.permission.READ_CONTACTS)
-                    == PackageManager.PERMISSION_GRANTED -> {
+        if (ContextCompat.checkSelfPermission(
+                this,
+                Manifest.permission.READ_CONTACTS
+            ) == PackageManager.PERMISSION_GRANTED
+        ) {
+            readContacts()
+        } else {
+            resultHelper.checkAndRequestContactsPermission {
                 readContacts()
-            }
-            else -> {
-                resultHelper.checkAndRequestContactsPermission {
-                    readContacts()
-                }
             }
         }
     }
@@ -64,7 +63,14 @@ class ContactList : AppCompatActivity() {
         recyclerView.layoutManager = GridLayoutManager(this, 1)
         lifecycleScope.launch {
             val contactData = fetchContacts()
-            recyclerView.adapter = ContactListAdapter(contactData)
+            recyclerView.adapter = ContactListAdapter(contactData) { clickedContact ->
+                val intent = Intent(this@ContactList, OpenContact::class.java).apply {
+                    putExtra("CONTACT_NAME", clickedContact.name)
+                    putExtra("CONTACT_NUMBER", clickedContact.conNumber)
+                    putExtra("CONTACT_IMAGE", clickedContact.conImage)
+                }
+                startActivity(intent)
+            }
         }
     }
 

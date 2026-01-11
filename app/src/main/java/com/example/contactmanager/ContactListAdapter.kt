@@ -8,7 +8,7 @@ import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import androidx.core.net.toUri
 
-class ContactListAdapter(val contacts: List<Contact>) :
+class ContactListAdapter(val contacts: List<Contact>, private val onItemClick: (Contact) -> Unit) :
     RecyclerView.Adapter<ContactListAdapter.ContactViewHolder>() {
     override fun onCreateViewHolder(
         parent: ViewGroup,
@@ -23,6 +23,10 @@ class ContactListAdapter(val contacts: List<Contact>) :
         val contact = contacts[position]
         holder.tvName.text = contact.name
         holder.tvNumber.text = contact.conNumber
+
+        holder.itemView.setOnClickListener {
+            onItemClick(contact) // 2. Trigger the callback
+        }
 
         // Attempt to load photo (use the contact's thumbnail URI)
         if (contact.conImage != null) {

@@ -12,6 +12,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import androidx.core.content.edit
+import kotlin.invoke
 
 class Permission(private val activity: AppCompatActivity) {
 
@@ -28,7 +29,6 @@ class Permission(private val activity: AppCompatActivity) {
         val writeGranted = permissions[Manifest.permission.WRITE_CONTACTS] ?: false
 
         if ( readGranted && writeGranted) {
-            //readContacts()
             onPermissionsGranted?.invoke()
         } else {
             // PermissionA denied
@@ -50,8 +50,8 @@ class Permission(private val activity: AppCompatActivity) {
         when {
             // Case 1: PermissionA is already granted
             readPermission == PackageManager.PERMISSION_GRANTED && writePermission == PackageManager.PERMISSION_GRANTED -> {
-                //readContacts()
                 onSuccess()
+                return
             }
             // Case 2: Educational UI (Rationale)
             ActivityCompat.shouldShowRequestPermissionRationale(
@@ -83,6 +83,7 @@ class Permission(private val activity: AppCompatActivity) {
         AlertDialog.Builder(activity)
             .setTitle("Contacts PermissionA Needed")
             .setMessage("This app is much more useful with your contacts! Allow access to see your")
+            .setCancelable(false)
             .setPositiveButton("Allow") { _, _ ->
                 // Re-request the permission after the user acknowledges the explanation
                 requestPermissionLauncher.launch(
@@ -95,6 +96,12 @@ class Permission(private val activity: AppCompatActivity) {
             .setNegativeButton("No Thanks"){ _, _ ->
                 activity.moveTaskToBack(true)
             }
+            .setOnKeyListener { _, keyCode, _ ->
+                if (keyCode == android.view.KeyEvent.KEYCODE_BACK) {
+                    activity.finish()
+                    true
+                } else false
+            }
             .show()
     }
 
@@ -102,6 +109,7 @@ class Permission(private val activity: AppCompatActivity) {
         AlertDialog.Builder(activity)
             .setTitle("PermissionA Permanently Denied")
             .setMessage("You have denied contact permission twice. To use this feature, you must enable it manually in the App Settings.")
+            .setCancelable(false)
             .setPositiveButton("Go to Settings") { _, _ ->
                 try{
                 val intent = Intent(Settings.ACTION_APPLICATION_DETAILS_SETTINGS).apply {
@@ -114,6 +122,12 @@ class Permission(private val activity: AppCompatActivity) {
             }
             .setNegativeButton("Cancel"){ _,_ ->
                 activity.moveTaskToBack(true)
+            }
+            .setOnKeyListener { _, keyCode, _ ->
+                if (keyCode == android.view.KeyEvent.KEYCODE_BACK) {
+                    activity.moveTaskToBack(true)
+                    true
+                } else false
             }
             .show()
     }

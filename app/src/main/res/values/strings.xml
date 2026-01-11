@@ -7,4 +7,6 @@
     <string name="create_contact">Create New Contact</string>
     <string name="contact_photo">Contact Photo</string>
     <string name="contact_manager">Contact Manager</string>
+    <string name="tvEdit_contact">Edit Contact</string>
+    <string name="btSave">Save</string>
 </resources>
