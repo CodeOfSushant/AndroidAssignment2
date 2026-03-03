@@ -1,7 +1,6 @@
 package com.example.contactmanager
 
 import android.content.ContentProviderOperation
-import android.content.Intent
 import android.graphics.Bitmap
 import android.graphics.BitmapFactory
 import android.net.Uri
@@ -15,15 +14,13 @@ import androidx.activity.enableEdgeToEdge
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.net.toUri
-import androidx.core.view.ViewCompat
-import androidx.core.view.WindowInsetsCompat
 import androidx.lifecycle.lifecycleScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 import java.io.ByteArrayOutputStream
 
-class UpdateContact : AppCompatActivity() {
+class UpdateContactActivity : AppCompatActivity() {
     private var selectedBitmap: Bitmap? = null
 
     private lateinit var conImage: ImageView
@@ -75,7 +72,7 @@ class UpdateContact : AppCompatActivity() {
                 saveButton.isEnabled = true
             } else {
                 // Handle case where contact isn't found
-                Toast.makeText(this@UpdateContact, "Contact not found", Toast.LENGTH_SHORT).show()
+                Toast.makeText(this@UpdateContactActivity, "Contact not found", Toast.LENGTH_SHORT).show()
             }
         }
 
@@ -95,7 +92,7 @@ class UpdateContact : AppCompatActivity() {
                         smallBitmap,
                         currentId
                     )
-                    //Toast.makeText(this@UpdateContact, "Contact Updated", Toast.LENGTH_SHORT).show()
+                    //Toast.makeText(this@UpdateContactActivity, "Contact Updated", Toast.LENGTH_SHORT).show()
                    // finish()
                 }
             }

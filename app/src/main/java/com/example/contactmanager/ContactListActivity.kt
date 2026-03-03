@@ -18,7 +18,7 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 
-class ContactList : AppCompatActivity() {
+class ContactListActivity : AppCompatActivity() {
 
     private lateinit var createConButton: Button
     private lateinit var backCMTV: TextView
@@ -36,7 +36,7 @@ class ContactList : AppCompatActivity() {
             readContacts()
         }
         createConButton.setOnClickListener {
-            val intent = Intent(this, AddContact::class.java)
+            val intent = Intent(this, AddContactActivity::class.java)
             startActivity(intent)
         }
     }
@@ -64,7 +64,7 @@ class ContactList : AppCompatActivity() {
         lifecycleScope.launch {
             val contactData = fetchContacts()
             recyclerView.adapter = ContactListAdapter(contactData) { clickedContact ->
-                val intent = Intent(this@ContactList, OpenContact::class.java).apply {
+                val intent = Intent(this@ContactListActivity, OpenContactActivity::class.java).apply {
                     putExtra("CONTACT_NAME", clickedContact.name)
                     putExtra("CONTACT_NUMBER", clickedContact.conNumber)
                     putExtra("CONTACT_IMAGE", clickedContact.conImage)

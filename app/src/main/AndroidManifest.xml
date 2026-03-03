@@ -16,16 +16,16 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.ContactManager">
         <activity
-            android:name=".OpenContact"
+            android:name=".OpenContactActivity"
             android:exported="false" />
         <activity
-            android:name=".UpdateContact"
+            android:name=".UpdateContactActivity"
             android:exported="false" />
         <activity
-            android:name=".AddContact"
+            android:name=".AddContactActivity"
             android:exported="false" />
         <activity
-            android:name=".ContactList"
+            android:name=".ContactListActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

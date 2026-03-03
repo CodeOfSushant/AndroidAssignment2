@@ -5,14 +5,11 @@ import android.os.Bundle
 import android.widget.Button
 import android.widget.ImageView
 import android.widget.TextView
-import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.net.toUri
-import androidx.core.view.ViewCompat
-import androidx.core.view.WindowInsetsCompat
 
-class OpenContact : AppCompatActivity() {
+class OpenContactActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
@@ -34,7 +31,7 @@ class OpenContact : AppCompatActivity() {
 
         val editButton = findViewById<Button>(R.id.btEdit)
         editButton.setOnClickListener {
-            val intent1 = Intent(this, UpdateContact::class.java).apply{
+            val intent1 = Intent(this, UpdateContactActivity::class.java).apply{
                 putExtra("CONTACT_NAME", name)
                 putExtra("CONTACT_NUMBER", contact)
                 putExtra("CONTACT_IMAGE", image)

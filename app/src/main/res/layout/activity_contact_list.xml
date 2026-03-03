@@ -9,7 +9,7 @@ xmlns:android="http://schemas.android.com/apk/res/android"
     android:padding="16dp"
     android:layout_marginTop="4dp"
     android:fitsSystemWindows="true"
-    tools:context=".ContactList">
+    tools:context=".ContactListActivity">
 
     <TextView
         android:id="@+id/con_manager_bTV"

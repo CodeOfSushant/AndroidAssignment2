@@ -13,8 +13,6 @@ import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.view.ViewCompat
-import androidx.core.view.WindowInsetsCompat
 import androidx.lifecycle.lifecycleScope
 import com.hbb20.CountryCodePicker
 import kotlinx.coroutines.Dispatchers
@@ -22,7 +20,7 @@ import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 import java.io.ByteArrayOutputStream
 
-class AddContact : AppCompatActivity() {
+class AddContactActivity : AppCompatActivity() {
 
     private var selectedBitmap: Bitmap? = null
     private lateinit var imageView: ImageView
@@ -62,12 +60,12 @@ class AddContact : AppCompatActivity() {
                     lifecycleScope.launch {
                         val success = saveContact(name, fullNumber, selectedBitmap)
                         if (success) {
-                            Toast.makeText(this@AddContact, "Contact Saved!", Toast.LENGTH_SHORT)
+                            Toast.makeText(this@AddContactActivity, "Contact Saved!", Toast.LENGTH_SHORT)
                                 .show()
                             finish() // Go back to the list
                         } else {
                             Toast.makeText(
-                                this@AddContact,
+                                this@AddContactActivity,
                                 "Error saving contact",
                                 Toast.LENGTH_SHORT
                             )
